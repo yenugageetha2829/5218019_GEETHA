@@ -1,0 +1,23 @@
+
+def hackerlandRadioTransmitters(x, k):
+    x.sort()  # Sort house locations
+    n = len(x)
+    transmitters = 0
+    i = 0
+
+    while i < n:
+        transmitters += 1  # We will place at least one transmitter
+        # Move to the farthest house within k from current
+        loc = x[i] + k
+        while i < n and x[i] <= loc:
+            i += 1
+        
+        # Place transmitter at the last house within this range
+        loc = x[i-1] + k
+        while i < n and x[i] <= loc:
+            i += 1
+
+    return transmitters
+n, k = map(int, input().split())
+houses = list(map(int, input().split()))
+print(hackerlandRadioTransmitters(houses, k))
